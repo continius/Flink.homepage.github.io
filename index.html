@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flink Home</title>
+  <style>
+    /* Общие стили */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #2c2c2c;
+      color: #f1f1f1;
+    }
+    
+    /* Стили для шапки */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1c1c1c;
+      padding: 20px;
+    }
+
+
+    .input{
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 65px;
+  background-color: #0f0f0f;
+  justify-content: center;
+  border-radius: 20px;
+  align-items: center;
+}
+.input a{
+  margin: 10px 0;
+      font-size: 0.75em;
+      color: #8f8f8f;
+      text-decoration: none;
+}
+.value {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  color: white;
+  display: flex;
+  position:relative;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin:10px;
+}
+
+.value:not(:active):hover,
+.value:focus {
+  background-color: #21262c;
+}
+
+.value:focus,
+.value:active {
+  background-color: #1a1f24;
+  outline: none;
+}
+
+.value::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  width: 5px;
+  height: 80%;
+  background-color: #505050;
+  border-radius: 5px;
+  opacity: 0;
+}
+
+.value:focus::before,
+.value:active::before {
+  opacity: 1;
+}
+
+.value svg {
+  width: 15px;
+}
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      animation: slideInFromRight 1s ease-in-out;
+    }
+    
+    .logo img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+    
+    .logo h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    
+    .account {
+      display: flex;
+      align-items: center;
+      animation: slideInFromRight 1s ease-in-out;
+    }
+    .account a{
+      margin: 20px 10;
+      font-size: 0.75em;
+      color: #8f8f8f;
+      text-decoration: none; 
+    }
+    
+    .account img {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    /* From Uiverse.io by ahmed150up */ 
+.card {
+    position: absolute;
+    top:11%;
+    left:36%;
+  width: 1212px;
+  height: 935px;
+ background-color: #1a1f24;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  font-size: 18px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.chat-window {
+  height: 750px;
+  overflow-y: scroll;
+}
+
+.message-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-button {
+   position: absolute;
+   top:93%;
+   width:1189px ;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.message-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.send-button {
+  position: absolute;
+  left: 94%;
+  top: 18%;
+  border: none;
+  outline: none;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+}
+.contact {
+ position:absolute ;
+ top:-1898%;
+ left:-56%;
+ width: 650px;
+ height: 945px;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60);
+}  
+/* From Uiverse.io by Saad3092003 */ 
+.button {
+  position: absolute;
+  top: 10%;
+  left: -20%;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+button.learn-more {
+  width: 12rem;
+  height: auto;
+}
+
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  box-shadow: 0 0 5px 1px white;  
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936;
+  border-radius: 1.625rem;
+}
+
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.29rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: rgba(255, 255, 255, 0.493);
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+button:hover .circle {
+  width: 100%;
+  box-shadow: 0 0 10px 2px white;
+}
+
+button:hover .button-text {
+  transform: translate(-1.7rem, 0);
+}
+
+button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(8.7rem, 0);
+}
+
+button:active .circle .icon.arrow {
+  transform: translate(9.5rem, 0);
+  transition: all 0.3s;
+}
+
+button:active .circle {
+  transform: scale(0.9);
+  transition: all 0.3s;
+  box-shadow: 0 0 5px 0.5px white;
+}
+
+button:hover .button-text {
+  color: #fff;
+}
+
+button:active .button-text {
+  color: rgba(255, 255, 255, 0.459);
+}
+/* From Uiverse.io by LightAndy1 */ 
+.search {
+  position: absolute;
+  top: -82%;
+  left:  -54%;
+  display: flex;
+  line-height: 28px;
+  align-items: center;
+  position: relative;
+  max-width: 604px;
+}
+
+.phon {
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  height: 45px;
+  padding-left: 2.5rem;
+  box-shadow: 0 0 0 1.5px #2b2c37, 0 0 25px -17px #000;
+  border: 0;
+  border-radius: 12px;
+  background-color: #16171d;
+  outline: none;
+  color: #bdbecb;
+  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  cursor: text;
+  z-index: 0;
+}
+
+.phon::placeholder {
+  color: #bdbecb;
+}
+
+.phon:hover {
+  box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+}
+
+.phon:active {
+  transform: scale(0.95);
+}
+
+.phon:focus {
+  box-shadow: 0 0 0 2.5px #2f303d;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  fill: #bdbecb;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  z-index: 1;
+}
+    /* Стили для анимации */
+    .welcome-animation {
+      position: absolute;
+      top: 17%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    
+    .welcome-animation h2 {
+      font-size: 36px;
+      margin: 0;
+      animation: slideInFromRight 2s ease-in-out;
+    }
+
+    /* Стили для контента */
+    .content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      padding: 20px;
+      margin-top: 100px;
+      animation: slideInFromBottom 1s ease-in-out;
+    }
+    
+    .stories  {
+      position: absolute;
+   top: 24%;
+      width: 1450px;
+ height: 75px;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60);
+     animation: slideInFromBottom 2s ease-in-out;
+
+    }
+/* From Uiverse.io by MuhammadHasann */ 
+/* From Uiverse.io by Yaseen549 */ 
+.posts {
+  position:absolute;
+  width: 1450px;
+ height:auto;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60);
+   animation: slideInFromBottom 1.8s ease-in-out;
+  top: 40%;
+  left:1%
+ 
+}
+    .stories-MINI  {
+      position: absolute;
+   top: 0%;
+   left: 103%;
+      width: 350px;
+ height: 75px;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60); 
+    }
+/* From Uiverse.io by MuhammadHasann */ 
+/* From Uiverse.io by Yaseen549 */ 
+.posts-MINI {
+  position:absolute;
+  width: 350px;
+ height: 750px;
+ border-radius: 30px;
+ background: #212121;
+ box-shadow: 15px 15px 30px rgb(25, 25, 25),
+             -15px -15px 30px rgb(60, 60, 60);
+   animation: slideInFromBottom 1.8s ease-in-out;
+  top: 40%;
+  left:80%;
+ 
+}
+.button {
+  font-size: 18px;
+  color: #e1e1e1;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms; 
+  transition-property: color;
+}
+
+button:focus,
+button:hover {
+  color: #fff;
+}
+
+button:focus:after,
+button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+/* From Uiverse.io by WhiteNervosa */
+button {
+  font-size: 18px;
+  color: #e1e1e1;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+
+button:focus,
+button:hover {
+  color: #fff;
+}
+
+button:focus:after,
+button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #fff;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+
+.post-form-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.post-form input,
+.post-form textarea {
+  padding: 10px;
+  border: 1px solid #212121;
+  border-radius: 5px;
+}
+
+.post-form button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none; 
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* From Uiverse.io by WhiteNervosa */ 
+button {
+  font-size: 18px;
+  color: #e1e1e1;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+}
+
+button:focus,
+button:hover {
+  color: #fff;
+}
+
+button:focus:after,
+button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #212121;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #212121(0, 0%, 80%);
+  border-radius: 4px;
+}
+
+button {
+  background-color: hsl(0, 0%, 13%);
+  color: #424242;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post {
+  border: 1px solid #212121;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.post img {
+  max-width: 375px;
+  height: auto;
+  margin-left: 10px;
+  cursor: pointer;
+}
+#post-form {
+    background-color: #212121;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px;
+    background-color: #212121;
+    color: rgb(51, 51, 51);
+    border-radius: 23px;
+    cursor: pointer;
+    position: relative;
+    left: 15px;
+    top: 3px;
+}
+
+button:hover {
+    background-color: #212121;
+}
+
+#post-display {
+    border-top: 1px solid #212121;
+    padding-top: 20px;
+}
+
+#post-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.hidden {
+    display: none;
+}
+.post-title {
+position: relative;
+right:400px;
+}
+/* From Uiverse.io by Yaya12085 */ 
+.div {
+  position: relative;
+  left:25px;
+  top:-25px;
+  background-color: #30344c;
+  padding: 1em;
+  z-index: 5;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  max-width: 375px;
+  height: auto;
+  transition: 200ms ease-in-out;
+}
+
+.username {
+  color: #C6E1ED;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.body .text {
+  margin: 0 10px 0 0;
+  white-space: pre-line;
+  color: #c0c3d7;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  color: #9fa4aa;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  margin-top: 10px;
+}
+
+.footer div {
+  margin-right: 1rem;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.footer svg {
+  margin-right: 5px;
+  height: 100%;
+  stroke: #9fa4aa;
+}
+
+.viewer span {
+  height: 20px;
+  width: 20px;
+  background-color: rgb(28, 117, 219);
+  margin-right: -6px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: grid;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+  font-size: 8px;
+  color: #fff;
+  padding: 2px;
+}
+
+.viewer span svg {
+  stroke: #fff;
+}
+.h2 {
+position: relative;
+top: 10%;
+left: 60%;
+color:#C6E1ED;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    /* Анимация */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideInFromRight {
+      0% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideInFromBottom {
+      0% {
+        transform: translateY(40%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="Flink.logo.jpg" alt="Flink Logo">
+      <h1>Flink</h1>
+    </div>
+    <!-- From Uiverse.io by BiliBC034 --> 
+<div class="input">
+  <button class="value">
+   <a  href="https://www.flink.homepage.com/">Home</a>
+  </button>
+  <button class="value">
+    <a href="https://flink.chats.com/">Chats</a>
+  </button>
+  <button class="value" >
+   <a href="https://flink.archive.com/">Archive</a>
+  </button>
+  <button class="value">
+    <a  href="https://flink.favorites.com/">Favorites</a>
+  </button>
+  <button class="value" >
+    <a href="https://flink.settings.com/">Settings</a>
+  </button>
+</div>
+    <div class="account">
+      <a href="http://127.0.0.1:5500/Flink.signup.html">Account</a>
+      <img src="account.logo.jpg" alt="Account Logo">
+    </div>
+  </header>
+  
+  <div class="welcome-animation">
+    <h2>Welcome to Flink</h2>
+  </div>
+
+  <div class="content">
+    <div class="stories">
+          <div class="stories-MINI">
+    </div>
+    </div>
+  </div>
+  <div class="posts">
+    <div id="posts-container"></div>
+          <div>
+       <button id="create-post-button">Create Post</button>
+       </div> 
+<div id="form-container" class="hidden">
+        <div id="post-form">
+            <input type="file" id="image-input" accept="image/*">
+            <input type="text" id="title-input" placeholder="Введите заголовок">
+            <textarea id="description-input" placeholder="Введите описание"></textarea>
+            <button id="submit-post-button">Public post</button>
+        </div>
+        <div id="posts-container">
+
+        </div>
+          <div>
+         <div id="post-display">
+    <div>
+     <img id="post-image" src="#" alt="Изображение поста" style="display: none;">
+        <div class="body">
+        <p id="post-description"></p><h4 id="post-title" class="post-tittle"></h4>
+    </div></div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+
+    <script src="script.js"></script> 
+    </div>
+  </div>
+        <div class="posts-MINI">
+        <div id="post-container">   
+        </div>
+        </div>       
+      </div>
+      <div>       
+</div>
+<div class="post-form-container" style="display: none;">
+  <form class="post-form">
+    <input type="text" placeholder="Title" />
+    <textarea placeholder="Content"></textarea>
+    <button class="Create" type="submit">Create Post</button>
+  </form>
+  </div>
+</div>
+</body>
+</html>
